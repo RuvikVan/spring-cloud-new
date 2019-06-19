@@ -1,0 +1,31 @@
+server:
+  port: 24543
+spring:
+  profiles:
+    active: new
+  application:
+    name: gateway
+  cloud:
+    consul:
+      port: 8500
+      discovery:
+        register: true
+        serviceName: ${spring.application.name}
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 15s
+        prefer-ip-address: true
+      host: 172.18.0.5
+app:
+  id: springboot-apollo
+apollo:
+  meta: http://172.18.0.4:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
